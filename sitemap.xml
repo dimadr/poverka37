@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+  
+  <!-- Главная страница -->
+  <url>
+    <loc>https://poverka37.ru/</loc>
+    <lastmod>2025-11-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+    <!-- Основные изображения главной страницы -->
+    <image:image>
+      <image:loc>https://poverka37.ru/images/pipe.webp</image:loc>
+      <image:title>Трубопровод учета энергоресурсов</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://poverka37.ru/images/metrologia.webp</image:loc>
+      <image:title>Оборудование для поверки приборов учета</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://poverka37.ru/images/sert.jpeg</image:loc>
+      <image:title>Сертификаты аккредитации по ГОСТ RA.RU.312519</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://poverka37.ru/images/map.webp</image:loc>
+      <image:title>Карта расположения офиса компании</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://poverka37.ru/images/zayavka.png</image:loc>
+      <image:title>Форма заявки на услуги</image:title>
+    </image:image>
+    <!-- Кликабельные иконки социальных сетей -->
+    <image:image>
+      <image:loc>https://poverka37.ru/images/whatsapp.svg</image:loc>
+      <image:title>Свяжитесь с нами через WhatsApp</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://poverka37.ru/images/viber.svg</image:loc>
+      <image:title>Свяжитесь с нами через Viber</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://poverka37.ru/images/telegram.svg</image:loc>
+      <image:title>Свяжитесь с нами через Telegram</image:title>
+    </image:image>
+  </url>
+
+  <!-- Документация ФГИС ARSHIN -->
+  <url>
+    <loc>https://poverka37.ru/docs/arshin.html</loc>
+    <lastmod>2025-11-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <!-- Изображения из документации -->
+    <image:image>
+      <image:loc>https://poverka37.ru/docs/images/arshin1.jpg</image:loc>
+      <image:title>ФГИС ARSHIN - система государственного реестра средств измерений</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://poverka37.ru/docs/images/arshin2.jpg</image:loc>
+      <image:title>Регистрация результатов поверки в ARSHIN</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://poverka37.ru/docs/images/arshin3.jpg</image:loc>
+      <image:title>Отчет по результатам калибровки в ARSHIN</image:title>
+    </image:image>
+  </url>
+
+</urlset>

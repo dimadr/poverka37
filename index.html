@@ -1,0 +1,925 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ru-RU" prefix="og: https://ogp.me/ns#">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<style>img:is([sizes="auto" i], [sizes^="auto," i]) { contain-intrinsic-size: 3000px 1500px }</style>
+
+<title>Учет энергоресурсов в организациях</title>
+<meta name="description" content="Решения в сфере учета энергоресурсов для бизнеса и бюджетных организаций" />
+<meta name="robots" content="max-image-preview:large" />
+<link rel="canonical" href="  https://poverka37.ru/  " />
+
+<!-- Favicon -->
+<link rel="shortcut icon" href="favicon.svg" type="image/x-icon">
+
+<!-- GEO BLOCK SCRIPT -->
+<script>
+  // Проверяем, что мы не на локальном сервере
+  if (location.hostname !== 'localhost' && location.hostname !== '127.0.0.1') {
+    fetch('https://ipapi.co/json/')
+      .then(response => response.json())
+      .then(data => {
+        const country = data.country; // Код страны (например, "RU")
+        const ip = data.ip; // Для отладки
+
+        console.log('Geo Debug: IP =', ip, 'Country =', country);
+
+        if (country !== 'RU') {
+          // Блокируем доступ для всех, кроме России
+          document.body.innerHTML = `
+            <div style="text-align:center; margin-top:50px; color:red; font-size:24px;">
+              Access is denied for your region.
+              <p style="font-size:18px; color:#333;">Your IP: ${ip}, Detected Country: ${country}</p>
+              <button onclick="location.reload()" style="margin-top:20px; padding:10px 20px; font-size:16px;">Try again</button>
+            </div>
+          `;
+        } else {
+          console.log('Geo Debug: Доступ разрешён для RU.');
+        }
+      })
+      .catch(error => {
+        console.error('Ошибка при определении геолокации:', error);
+        // ВАЖНО: Не блокируем доступ при ошибке!
+        console.log('Geo Debug: Ошибка геолокации, доступ разрешён для безопасности.');
+        // Если геолокация не удалась, НЕ БЛОКИРУЕМ.
+        // Это предотвращает блокировку при ошибках API.
+      });
+  } else {
+    console.log('Geo Debug: Локальный хост, скрипт геоблокировки отключен.');
+  }
+</script>
+
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  line-height: 1.5;
+  color: #333;
+  background: #fff;
+}
+
+a {
+  color: #0066cc;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* HEADER */
+
+header {
+  background: #fff;
+  padding: 12px 0;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.08);
+  display: flex;
+  align-items: stretch;
+}
+
+.header-center {
+  text-align: center;
+  margin: 60px 0 40px 0;
+  display: block;
+  margin-left: 150px; /* сдвигает заголовок вправо, меньше чем 200px */
+  max-width: 800px;   /* больше ширина для заголовка */
+}
+
+.header-center h1 {
+  font-family: 'Montserrat', Arial, sans-serif;
+  font-size: 2.5vw;
+  font-weight: 700;
+  line-height: 1.13;
+  color: #082A60;
+  margin: 0;
+  text-align: center;
+}
+
+.header-left {
+  padding: 12px 40px;
+  display: flex;
+  align-items: center;
+  flex: 0 0 auto;
+}
+
+.logo img {
+  height: auto;
+  width: auto;
+  max-width: 150px;
+}
+
+.header-center {
+  flex: 1;
+  padding: 20px 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.header-right {
+  margin-left: auto;
+  margin-right: 50px;  /* ДОБАВИТЬ ОТСТУП */
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.callback-btn {
+  background:#c7120d; 
+  color:#fff;
+  border-radius:50%; 
+  border:none;
+  width:154px;        /* было 140px, увеличена на 10% */
+  height:154px;       /* было 140px, увеличена на 10% */
+  font-size:1.17rem; 
+  font-weight:400;    /* было 700 (жирный), теперь 400 (обычный) */
+  box-shadow:0 4px 15px rgba(0,0,0,.18);
+  text-align:center; 
+  display:flex; 
+  align-items:center; 
+  justify-content:center;
+  cursor:pointer; 
+  transition:.15s;
+}
+
+.callback-btn:hover { 
+  box-shadow:0 10px 26px rgba(0,0,0,.26); 
+  background:#dd1813;
+}
+
+/* MODAL */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.6);
+  animation: fadeIn 0.3s;
+}
+
+.modal.active {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-content {
+  background-color: #fff;
+  padding: 12px;
+  border-radius: 8px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+  max-width: 420px;
+  width: auto;
+  max-height: 70vh;
+  overflow: auto;
+  animation: slideIn 0.3s;
+}
+
+.modal-content img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+.modal-close {
+  position: absolute;
+  top: 15px;
+  right: 20px;
+  font-size: 28px;
+  font-weight: bold;
+  color: #fff;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.modal-close:hover {
+  color: #f0f0f0;
+  transform: scale(1.2);
+}
+
+@keyframes slideIn {
+  0% { transform: translateY(-50px); opacity: 0; }
+  100% { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes fadeIn {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+/* HERO SECTION WITH TRUMPET */
+.hero {
+  background: linear-gradient(135deg, #001d4d 0%, #003d99 50%, #00215a 100%);
+  color: #fff;
+  padding: 60px 60px;
+}
+
+.hero-container {
+  max-width: 1600px;
+  margin: 0 auto;
+}
+
+.hero-image {
+  text-align: center;
+  margin-bottom: 50px;
+  animation: fadeIn 1.5s;
+}
+
+.hero-image img {
+  max-width: 100%;
+  height: auto;
+  max-height: 600px;
+  animation: slide 0.8s forwards;
+  animation-delay: 0.3s;
+  margin-left: -100%;
+  /* Добавлены width и height для предотвращения сдвига макета */
+  width: auto;
+  height: auto;
+}
+
+@keyframes slide {
+  100% { margin-left: 0; }
+}
+
+.hero-title {
+  font-size: 3.5rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  margin-bottom: 50px;
+  text-align: center;
+  letter-spacing: 2px;
+  line-height: 1.2;
+  color: #ffd700;
+  animation: fadeIn 2s;
+}
+
+/* SERVICE CARDS ROW */
+.services-grid {
+  display: grid;
+  /* grid-template-columns: repeat(5, 1fr); */ /* Закомментировано, используем гибкий подход */
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 20px; /* Уменьшенный отступ по умолчанию */
+}
+
+.service-card {
+  text-align: center;
+  transition: all 0.3s;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+  padding: 20px;
+  cursor: pointer;
+}
+
+.service-card:hover {
+  transform: translateY(-8px);
+}
+
+.service-card img {
+  max-width: 100%;
+  height: auto;
+  transition: transform 0.3s;
+  object-fit: contain;
+  max-height: 150px;
+  /* Добавлены width и height для предотвращения сдвига макета */
+  width: 122px;
+  height: 150px;
+}
+
+.service-card:hover img {
+  transform: scale(1.1);
+}
+
+/* FOOTER */
+footer {
+  background: #f5f5f5;
+  padding: 50px 60px;
+}
+
+.footer-container {
+  max-width: 1600px;
+  margin: 0 auto;
+}
+
+.footer-content {
+  display: grid;
+  grid-template-columns: 1.3fr 1.3fr;
+  gap: 60px;
+  margin-bottom: 40px;
+}
+
+.footer-section {
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  /* min-height: 600px; - Убрано для более гибкого поведения */
+  /* height: 100%; - Возможно, не нужно */
+}
+
+.footer-section h3 {
+  color: #00215a;
+  font-size: 1.15rem;
+  margin-bottom: 15px;
+  font-weight: 700;
+}
+
+.footer-section p {
+  margin-bottom: 12px;
+  color: #555;
+  font-size: 1rem;      /* Увеличен размер шрифта */
+  font-weight: 500;     /* Увеличена жирность (можно поставить 600 или 700, если хотите ещё жирнее) */
+  line-height: 1.65;
+}
+
+.footer-section a {
+  color: #0066cc;
+  font-weight: 500;
+}
+
+.footer-section ul {
+  list-style: none;
+  margin: 12px 0;
+}
+
+.footer-section ul li {
+  margin-bottom: 8px;
+  color: #555;
+  font-size: 0.93rem;
+  line-height: 1.6;
+}
+
+.footer-section ul li:before {
+  content: "• ";
+  color: #00215a;
+  font-weight: bold;
+  margin-right: 6px;
+}
+
+.footer-links {
+  display: flex;
+  gap: 12px;
+  margin: 16px 0;
+  flex-wrap: wrap;
+}
+
+.footer-btn {
+  background: #125da9;
+  color: white !important;
+  border: none;
+  padding: 10px 16px;
+  border-radius: 5px;
+  font-weight: bold;
+  font-size: 0.73rem;
+  cursor: pointer;
+  transition: background 0.3s;
+  text-align: center;
+  flex: 1;
+  min-width: 140px;
+}
+
+.footer-btn:hover {
+  background: #0d4080;
+}
+
+.hotbut {
+  background: linear-gradient(135deg, #c7120d 0%, #a20a08 100%) !important;
+  color: white !important;
+  border: none !important;
+  padding: 10px 24px !important;
+  border-radius: 50px !important;
+  font-weight: 500 !important;
+  font-size: 0.8rem !important;
+  cursor: pointer !important;
+  transition: all 0.3s ease !important;
+  margin-top: 12px !important;
+  box-shadow: 0 4px 15px rgba(199, 18, 13, 0.3) !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 4px !important;
+  white-space: nowrap !important;
+  max-width: 180px !important; /* Ограничиваем максимальную ширину */
+}
+
+.hotbut:hover {
+  background: linear-gradient(135deg, #dd1813 0%, #b00d0a 100%);
+  box-shadow: 0 6px 20px rgba(199, 18, 13, 0.4);
+  transform: translateY(-2px);
+}
+
+.hotbut:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 8px rgba(199, 18, 13, 0.3);
+}
+
+.messengers {
+  display: flex;
+  gap: 12px;
+  margin: 12px 0;
+  align-items: center;
+}
+
+.messenger {
+  width: 40px;
+  height: 40px;
+  border: none;
+  cursor: default;
+  transition: transform 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  padding: 0;
+}
+
+.messenger img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.messenger:hover {
+  transform: scale(1.15);
+}
+
+/* Обновлённый стиль для контейнера заголовка и карты */
+.map-and-title-wrapper {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1; /* Занимает всё оставшееся место */
+  margin-top: 20px; /* Отступ сверху */
+}
+
+.map-title {
+  font-size: 1.6em;
+  font-weight: bold;
+  text-align: center;
+  margin: 0 0 10px 0; /* Отступ только снизу */
+  color: #000;
+  display: block;
+  align-self: center;
+  width: 100%;
+}
+
+/* Стили для статичной карты */
+.map-static {
+  width: 100%;
+  height: auto;
+  max-height: 335px; /* Ограничиваем высоту */
+  border-radius: 5px;
+  cursor: pointer; /* Показываем, что можно кликнуть */
+  object-fit: cover; /* Заполняем область без искажений */
+  transition: filter 0.2s; /* Плавный эффект при наведении */
+}
+
+.map-static:hover {
+  filter: brightness(0.9); /* Тонкое затемнение при наведении */
+}
+
+/* Стили для активной карты (после загрузки) */
+.map-loaded {
+  border: none;
+}
+
+.footer-bottom {
+  background: #484848;
+  color: #fff;
+  padding: 18px 30px;
+  text-align: center;
+  border-radius: 5px;
+  font-size: 0.82rem;
+}
+
+.footer-bottom a {
+  color: #fff;
+}
+
+/* RESPONSIVE */
+@media (max-width: 1300px) {
+  .services-grid {
+    /* grid-template-columns: repeat(4, 1fr); */ /* Закомментировано, гибкий подход */
+  }
+}
+
+@media (max-width: 1200px) {
+  .header-center h1 {
+    font-size: 1rem;
+  }
+
+  .header-right {
+    width: 35%;
+  }
+
+  .hero-title {
+    font-size: 2.5rem;
+  }
+
+  .hero-image img {
+    max-height: 450px;
+  }
+}
+
+@media (max-width: 1000px) {
+  .footer-content {
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+  }
+}
+
+@media (max-width: 768px) {
+  /* Адаптация шапки */
+  header {
+    flex-direction: column;
+    align-items: center;
+    padding: 10px 0;
+  }
+
+  .header-left {
+    width: 100%;
+    text-align: center;
+    margin: 5px 0;
+    padding: 5px 20px; /* Уменьшаем отступы */
+  }
+
+  .header-left .logo img {
+    max-width: 100px; /* Уменьшаем логотип */
+    width: auto;
+    height: auto;
+  }
+
+  .header-center {
+    width: 100%;
+    text-align: center;
+    margin: 5px 0;
+    padding: 5px 20px; /* Уменьшаем отступы */
+    margin-left: 0; /* Сбрасываем сдвиг */
+  }
+
+  .header-center h1 {
+    font-size: 1rem; /* Уменьшаем заголовок */
+    line-height: 1.3;
+    margin: 0;
+  }
+
+  .header-right {
+    width: 100%;
+    text-align: center;
+    margin: 5px 0;
+    padding: 5px 20px; /* Уменьшаем отступы */
+    margin-left: 0; /* Сбрасываем отступ */
+    margin-right: 0; /* Сбрасываем отступ */
+  }
+
+  .callback-btn {
+    width: 80px;   /* Уменьшаем ширину кнопки */
+    height: 80px;  /* Уменьшаем высоту кнопки */
+    font-size: 0.7rem; /* Уменьшаем шрифт */
+    padding: 0;     /* Убираем внутренние отступы */
+    box-shadow: 0 4px 10px rgba(0,0,0,.18); /* Уменьшаем тень */
+  }
+
+  .callback-btn:hover {
+    box-shadow: 0 6px 15px rgba(0,0,0,.26);
+  }
+
+  .hero {
+    padding: 30px 20px;
+  }
+
+  .hero-title {
+    font-size: 1.8rem;
+  }
+
+  .hero-image img {
+    max-height: 300px;
+    width: auto;
+    height: auto;
+  }
+
+  .services-grid {
+    grid-template-columns: repeat(2, 1fr); /* 2 колонки на планшет */
+    gap: 15px; /* Уменьшаем отступ */
+  }
+
+  .service-card img {
+    max-height: 100px; /* Уменьшаем изображения в карточках */
+    width: 122px;
+    height: 150px;
+  }
+
+  footer {
+    padding: 30px 20px;
+  }
+
+  .footer-content {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+
+  .footer-section {
+    min-height: auto;
+  }
+}
+
+@media (max-width: 480px) {
+  .services-grid {
+    grid-template-columns: 1fr; /* 1 колонка на мобильных */
+    gap: 10px; /* Еще меньше отступа */
+  }
+
+  .service-card img {
+    max-height: 80px; /* Еще меньше изображения */
+    width: 122px;
+    height: 150px;
+  }
+
+  .hero-title {
+    font-size: 1.3rem;
+  }
+
+  .hero-image img {
+    max-height: 200px;
+    width: auto;
+    height: auto;
+  }
+}
+</style>
+
+<!-- Yandex.Metrica counter -->
+<script type="text/javascript">
+    (function(m, e, t, r, i, k, a) {
+        m[i] = m[i] || function() {
+            (m[i].a = m[i].a || []).push(arguments)
+        };
+        m[i].l = 1 * new Date();
+
+        function loadMetrika() {
+            for (var j = 0; j < e.scripts.length; j++) {
+                if (e.scripts[j].src === r) {
+                    initMetrika();
+                    return;
+                }
+            }
+            k = e.createElement(t);
+            a = e.getElementsByTagName(t)[0];
+            k.async = 1;
+            k.src = r;
+            a.parentNode.insertBefore(k, a);
+
+            var checkInterval = setInterval(function() {
+                if (typeof ym === 'function') {
+                    clearInterval(checkInterval);
+                    initMetrika();
+                }
+            }, 100);
+        }
+
+        function initMetrika() {
+            if (!m[i].initialized) {
+                ym(93267305, "init", {
+                    clickmap: true,
+                    trackLinks: true,
+                    accurateTrackBounce: true
+                });
+                m[i].initialized = true;
+            }
+        }
+
+        setTimeout(loadMetrika, 10000);
+
+    })(window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+</script>
+
+<noscript>
+    <div>
+        <img src="https://mc.yandex.ru/watch/93267305" style="position:absolute; left:-9999px;" alt="" />
+    </div>
+</noscript>
+<!-- /Yandex.Metrica counter -->
+
+</head>
+
+<body class="home page-template">
+
+<!-- MODAL ОКНО -->
+<div id="applicationModal" class="modal">
+  <span class="modal-close" onclick="closeModal('applicationModal')">&times;</span>
+  <div class="modal-content">
+    <img src="./images/zayavka.png" alt="Заявка">
+  </div>
+</div>
+
+<!-- HEADER -->
+<header>
+<div class="header-left">
+<div class="logo">
+<img src="./images/metrologia.webp" alt="Метрология Сервис" width="150" height="178">
+</div>
+</div>
+<div class="header-center">
+<h1>Организация энергоучета и снижение энергозатрат на предприятии</h1>
+</div>
+<div class="header-right">
+<button class="callback-btn" onclick="openModal('applicationModal')">Бесплатный выезд специалиста на объект</button>
+</div>
+</header>
+
+<!-- НАЧАЛО: Основное содержимое сайта -->
+<main>
+<!-- HERO SECTION -->
+<section class="hero">
+<div class="hero-container">
+<div class="hero-image">
+<img src="./images/pipe.webp" alt="Система отопления и учета" width="800" height="600">
+</div>
+
+<h2 class="hero-title">Точное звучание ваших труб</h2>
+
+<!-- SERVICE CARDS -->
+<div class="services-grid">
+<div class="service-card" onclick="openModal('applicationModal')">
+<img src="./images/button1.webp" alt="Проектирование и монтаж узлов учета" width="122" height="150">
+</div>
+
+<div class="service-card" onclick="openModal('applicationModal')">
+<img src="./images/button2.webp" alt="Установка и обслуживание теплосчетчиков" width="122" height="150">
+</div>
+
+<div class="service-card" onclick="openModal('applicationModal')">
+<img src="./images/button3.webp" alt="Поверка и ремонт средств измерения" width="122" height="150">
+</div>
+
+<div class="service-card" onclick="openModal('applicationModal')">
+<img src="./images/button4.webp" alt="Мониторинг сроков поверки приборов" width="122" height="150">
+</div>
+
+<div class="service-card" onclick="openModal('applicationModal')">
+<img src="./images/button5.webp" alt="Дистанционный сбор показаний счетчиков" width="122" height="150">
+</div>
+</div>
+
+</div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+<div class="footer-container">
+<div class="footer-content">
+
+<!-- LEFT COLUMN - ABOUT COMPANY -->
+<div class="footer-section">
+<h3>О компании</h3>
+
+<p>Группа компаний «<strong>Метрология Сервис</strong>» занимается проектированием, монтажом и обслуживанием различных инженерных систем и узлов учета для коммерческих и бюджетных структур с 2000 года.</p>
+
+<h4 style="color:#00215a;margin-top:14px;margin-bottom:10px;font-size:0.95rem;font-weight:600;">Наши услуги:</h4>
+<ul>
+<li>Проектирование и монтаж узлов учета</li>
+<li>Техническое обслуживание инженерных систем</li>
+<li>Гидравлические испытания трубопроводов</li>
+<li>Поверка и ремонт средств измерения</li>
+<li>Мониторинг сроков поверки приборов</li>
+<li>Дистанционный сбор показаний счетчиков</li>
+</ul>
+
+<p style="margin-top:12px;">Накопленный опыт и профессионализм наших сотрудников позволяет решать любые задачи в области контроля и учета энергоресурсов «под ключ» на самом высоком уровне.</p>
+
+<p style="margin-top:12px;">Нашими услугами воспользовались многие коммерческие и бюджетные организации, строительные и управляющие компании, в том числе ТСЖ.</p>
+
+<p style="margin-top:12px;">Среди них: Автокран, Ивановская пивоваренная компания, Меланжевый комбинат, Клиника современной медицины, Департамент образования Ивановской области и другие.</p>
+
+<p style="margin-top:12px;">Мы дорожим своей репутацией, ценим своих клиентов и не предлагаем ничего лишнего — только точный расчет и решения, как существенно снизить Ваши расходы на энергозатраты.</p>
+
+<p style="margin-top:14px;color:#c7120d;font-weight:bold;font-size:0.97rem;"><strong>Метрология Сервис — эталон энергосбережения!</strong></p>
+
+<p style="margin-top:12px;font-size:0.9rem;"><em><a href="./images/sert.jpeg" target="_blank">Аттестат аккредитации № RA.RU.312519</a></em></p>
+
+<h4 style="color:#00215a;margin-top:16px;margin-bottom:10px;font-size:0.95rem;font-weight:600;">Сведения о поверке вашего счетчика:</h4>
+<div class="footer-links">
+<a class="footer-btn" href="https://fgis.gost.ru/fundmetrology/cm/results/    " target="_blank">ПЕРЕЙТИ НА САЙТ ФГИС «АРШИН»</a>
+<a class="footer-btn" href="./docs/arshin.html" target="_blank">КАК ИСКАТЬ НА САЙТЕ «АРШИН»?</a>
+</div>
+</div>
+
+<!-- RIGHT COLUMN - CONTACTS -->
+<div class="footer-section">
+<h3>Наши контакты</h3>
+
+<p><strong>Адрес:</strong><br>Россия, 153002, г. Иваново<br>ул. Жиделева, д. 35, офис 9</p>
+
+<p><strong>Телефон:</strong><br><a href="tel:+74932374723" style="font-size:1.15rem;font-weight:bold;color:#c7120d;">+7 4932 37-47-23</a></p>
+
+<button class="hotbut" onclick="openModal('applicationModal')">☎️ Заказать звонок</button>
+
+<p style="margin-top:14px;"><strong>Телефон:</strong><br>+7(930)347-45-03</p>
+
+<div class="messengers">
+  <span class="messenger" title="WhatsApp">
+    <img src="./images/whatsapp.svg" alt="WhatsApp">
+  </span>
+  <span class="messenger" title="Telegram">
+    <img src="./images/telegram.svg" alt="Telegram">
+  </span>
+  <span class="messenger" title="Viber">
+    <img src="./images/viber.svg" alt="Viber">
+  </span>
+</div>
+
+<p><strong>E-mail:</strong><br><a href="mailto:poverka37@mail.ru">poverka37@mail.ru</a></p>
+
+<p><strong>Сайт:</strong><br><a href="https://poverka37.ru    ">www.poverka37.ru</a></p>
+
+<p><strong>График работы:</strong><br>Пн.- Пт. 9:00 — 17:00</p>
+
+<!-- Новый контейнер для заголовка и карты -->
+<div class="map-and-title-wrapper">
+  <h4 class="map-title">Как нас найти?</h4>
+  <!-- Статичная карта с кликом -->
+  <img id="map-static" src="./images/map.webp" alt="Карта с отметкой Метрология Сервис" class="map-static" width="700" height="379">
+</div>
+
+</div>
+
+</div>
+
+<div class="footer-bottom">
+<p>© 2025 ООО "МетрологияСервис" | Политика в отношении обработки персональных данных на сайте <a href="./privacy.html" target="_blank">www.poverka37.ru</a></p>
+</div>
+</footer>
+
+</main>
+<!-- КОНЕЦ: Основное содержимое сайта -->
+
+<script>
+function openModal(modalId) {
+  document.getElementById(modalId).classList.add('active');
+}
+
+function closeModal(modalId) {
+  document.getElementById(modalId).classList.remove('active');
+}
+
+window.onclick = function(event) {
+  if (event.target.classList.contains('modal')) {
+    event.target.classList.remove('active');
+  }
+}
+
+// --- НОВЫЙ СКРИПТ ДЛЯ ОТЛОЖЕННОЙ ЗАГРУЗКИ КАРТЫ ---
+document.addEventListener('DOMContentLoaded', function() {
+  const mapStatic = document.getElementById('map-static');
+
+  // Функция для загрузки виджета карты
+  function loadMapWidget() {
+    // Проверяем, не загружена ли карта уже
+    if (mapStatic.parentElement.querySelector('iframe')) {
+      return; // Выходим, если карта уже вставлена
+    }
+
+    // Помечаем, что карта загружается
+    mapStatic.classList.add('map-loaded');
+
+    // Создаём новый script элемент для виджета Яндекс.Карт
+    const script = document.createElement('script');
+    script.type = 'text/javascript';
+    script.charset = 'utf-8';
+    script.async = true;
+    // Вставьте сюда ваш URL из конструктора Яндекс.Карт
+    script.src = 'https://api-maps.yandex.ru/services/constructor/1.0/js/?um=constructor%3Af9b1b399e4a263147f4521b37c3fd0abb259ce5bfe0b0e391415ff9bba47d95b&width=100%25&height=335&lang=ru_RU&scroll=true';
+
+    // Добавляем скрипт в родительский контейнер (вместо img)
+    mapStatic.parentNode.appendChild(script);
+
+    // Убираем статичное изображение
+    mapStatic.style.display = 'none'; // Скрываем изображение
+
+    // Убираем обработчики, чтобы они не срабатывали снова
+    mapStatic.removeEventListener('click', loadMapOnClick);
+    mapStatic.removeEventListener('touchstart', loadMapOnClick);
+  }
+
+  // Функция-обработчик клика/касания
+  function loadMapOnClick() {
+     loadMapWidget();
+  }
+
+  // Добавляем обработчики событий клика и касания к статичной карте
+  mapStatic.addEventListener('click', loadMapOnClick);
+  mapStatic.addEventListener('touchstart', loadMapOnClick); // Для сенсорных устройств
+
+});
+// --- КОНЕЦ НОВОГО СКРИПТА ---
+</script>
+
+</body>
+</html>
