@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Как искать на сайте ФГИС «АРШИН»</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #f5f5f5;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: #fff;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        h1 {
+            color: #2c3e50;
+            margin-bottom: 30px;
+            font-size: 2em;
+            border-bottom: 3px solid #3498db;
+            padding-bottom: 10px;
+        }
+        
+        h2 {
+            color: #34495e;
+            margin-top: 30px;
+            margin-bottom: 15px;
+            font-size: 1.5em;
+        }
+        
+        .intro {
+            background: #e8f4f8;
+            padding: 20px;
+            border-left: 4px solid #3498db;
+            margin-bottom: 30px;
+            border-radius: 4px;
+        }
+        
+        .method {
+            background: #f9f9f9;
+            padding: 20px;
+            margin-bottom: 25px;
+            border-radius: 6px;
+            border: 1px solid #e0e0e0;
+        }
+        
+        .method h3 {
+            color: #2980b9;
+            margin-bottom: 15px;
+            font-size: 1.2em;
+        }
+        
+        ol, ul {
+            margin-left: 25px;
+            margin-bottom: 15px;
+        }
+        
+        li {
+            margin-bottom: 10px;
+        }
+        
+        .important {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 4px;
+        }
+        
+        .important strong {
+            color: #856404;
+        }
+        
+        .link-button {
+            display: inline-block;
+            background: #3498db;
+            color: white;
+            padding: 12px 24px;
+            text-decoration: none;
+            border-radius: 5px;
+            margin: 20px 0;
+            transition: background 0.3s;
+        }
+        
+        .link-button:hover {
+            background: #2980b9;
+        }
+        
+        .example {
+            background: #e8f5e9;
+            padding: 15px;
+            border-left: 4px solid #4caf50;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+        
+        code {
+            background: #f4f4f4;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: 'Courier New', monospace;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Как искать на сайте ФГИС «АРШИН»</h1>
+        
+        <div class="intro">
+            <p><strong>ПОСМОТРЕТЬ РЕЗУЛЬТАТЫ ПРОВЕРКИ ПРИБОРОВ УЧЕТА ВЫ МОЖЕТЕ НА САЙТЕ ФГИС «АРШИН»</strong></p>
+            <a href="https://fgis.gost.ru/fundmetrology/cm/results" class="link-button" target="_blank">Перейти на сайт ФГИС «АРШИН»</a>
+        </div>
+
+        <h2>Способы поиска</h2>
+
+        <div class="method">
+            <h3>Вариант №1 — Через строку поиска</h3>
+            <ol>
+                <li>Перейдите на сайт ФГИС «АРШИН» по ссылке выше</li>
+                <li>Выберите год первичной поверки</li>
+                <li>В поисковой строке введите серийный номер прибора учета</li>
+                <li>Нажмите кнопку <strong>«Найти»</strong></li>
+            </ol>
+            
+            <div class="important">
+                <strong>Важно!</strong> Если в серийном номере присутствуют буквы, то при его написании следует переключить язык на английский и не ставить пробел между буквами и цифрами.
+            </div>
+            
+            <div class="example">
+                <strong>Пример:</strong> <code>BC103302</code>
+                <a href="https://poverka37.ru/docs/images/arshin1.jpg" target="_blank" rel="noopener noreferrer">
+                <img src="https://poverka37.ru/docs/images/arshin1.jpg" alt="Пример №1" style="max-width: 100%; height: auto; display: block;"></a>
+            </div>
+        </div>
+
+        <div class="method">
+            <h3>Вариант №2 — Через фильтр</h3>
+            <ol>
+                <li>Выберите год первичной поверки</li>
+                <li>Нажмите на кнопку <strong>«Настроить фильтр»</strong></li>
+                <li>В строке «Организация-поверитель» введите название организации (например, ООО «МЕТРОЛОГИЯ СЕРВИС»)</li>
+                <li>В строке «Заводской номер / Буквенно-цифровое обозначение» введите серийный номер прибора учета</li>
+                <li>Нажмите кнопку <strong>«Применить»</strong></li>
+            </ol>
+            <div class="example">
+                <strong>Пример поиска:</strong><br>
+                Водосчетчик был поверен 09 сентября 2021 года, серийный номер водосчетчика BC312021
+                <a href="https://poverka37.ru/docs/images/arshin2.jpg" target="_blank" rel="noopener noreferrer">
+                <img src="https://poverka37.ru/docs/images/arshin2.jpg" alt="Пример №2" style="max-width: 100%; height: auto; display: block;"></a>
+                После выполнения поиска в реестре система выдаст результаты поверки:
+                <a href="https://poverka37.ru/docs/images/arshin3.jpg" target="_blank" rel="noopener noreferrer">
+                <img src="https://poverka37.ru/docs/images/arshin3.jpg" alt="Пример №2" style="max-width: 100%; height: auto; display: block;"></a>
+            </div>
+        </div>
+
+        <h2>Полезная информация</h2>
+        
+        <div class="important">
+            <p><strong>Обратите внимание:</strong></p>
+            <ul>
+                <li>Данные о поверке должны быть внесены в систему в течение 40 рабочих дней после проведения поверки</li>
+                <li>С 24 сентября 2020 года единственным юридически значимым подтверждением проведенной поверки стала электронная запись во ФГИС «АРШИН»</li>
+                <li>Свидетельство на бумажном носителе может выдаваться по запросу и носит информационный характер</li>
+            </ul>
+        </div>
+
+        <h2>Что делать, если прибор не найден?</h2>
+        <ul>
+            <li>Проверьте правильность ввода серийного номера</li>
+            <li>Убедитесь, что выбран правильный год поверки</li>
+            <li>Попробуйте использовать альтернативный способ поиска</li>
+            <li>Возможно, данные еще не внесены в систему (до 40 рабочих дней)</li>
+            <li>Обратитесь в организацию, проводившую поверку</li>
+        </ul>
+    </div>
+</body>
+</html>
